@@ -26,7 +26,7 @@ Perhaps some remarks on the more pivotal components are in order:
 
 The `step` function in the `dataloader` file is the centerpiece of your `adl` project. When starting the docker container, the function will be recursively called, thereby governing the task-specific data loading process. Your `step` function defines the sequence of Alma REST API calls as well as the data to be logged row-wise in your customized log table. It does so by modifying  the `Condition` `c` object representing the process state at a time. See the simple example `dataloader` file for illustration of bibliographic items generation via POST requests.
 
-In order to use `adl` with docker-compose on a linux computer you can take the following steps:
+In order to use `adl` with docker compose on a linux computer you can take the following steps:
 
 1. cd into your `adl_project` top folder (above the `todo` folder)
 2. Build the docker container passing user, group and working directory of the host:
@@ -41,10 +41,10 @@ docker compose build --build-arg USER_ID=$(id -u) --build-arg GROUP_ID=$(id -g) 
 WD=$(pwd | rev | cut -d\/ -f1 | rev) docker compose up -d
 ``` 
 
-Consult container logs for debugging:
+Consult container logs for debugging (assuming that `adl_project` is the name of your top project folder):
 
 ```
-docker logs adl -ft
+docker logs adl_project -ft
 ```
 
 If the dataloader script finishes successfully, the logfile with timestamp appears in the automatically generated log subfolder of your subproject folder.
