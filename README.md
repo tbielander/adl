@@ -4,7 +4,7 @@ A wrapper for Alma[^1] REST API
 
 ## How to use `adl`
 
-Presumably the easiest way to use the `adl` library is within a docker container built from a project folder exhibiting the same folder structure as the GitLab project at hand. To that end the following folders and files are needed:
+Presumably the easiest way to use the `adl` library is within a docker container built from a project folder exhibiting the same folder structure as the GitHub project at hand. To that end the following folders and files are needed:
 
 ```
 adl_project
