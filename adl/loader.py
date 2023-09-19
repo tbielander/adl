@@ -103,7 +103,7 @@ class ADL:
             # row_start = Condition(1, start_msg, row, EmptyRequest, [])
             condition = self.take_step(step_function, condition)
             entries_processed += 1
-            print(str(entries_processed) + ":", ', '.join(condition.log_row))
+            print(str(entries_processed) + ":", condition.log_row)
             condition.step_num = 1
             condition.msg = start_msg
             condition.request = start_request
