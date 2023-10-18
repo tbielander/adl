@@ -230,6 +230,12 @@ class VendorPOLsRequest(Request):
         self.url = self.url_template.format(
             vendor_code = parse.quote(vendor_code))
 
+class VendorInvoicesRequest(Request):
+    def __init__(self, vendor_code, apikey=""):
+        super().__init__("vendor_invoices", apikey=apikey)
+        self.url = self.url_template.format(
+            vendor_code = parse.quote(vendor_code))
+
 # Electronic
 
 class PortfolioRequest(Request):

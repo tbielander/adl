@@ -25,6 +25,7 @@ API = {
     "vendors": "acq/vendors",
     "vendor": "acq/vendors/{vendor_code}",
     "vendor_pols": "acq/vendors/{vendor_code}/po-lines",
+    "vendor_invoices": "acq/vendors/{vendor_code}/invoices"
     # Electronic
     "portfolio": "electronic/e-collections/{collection_id}/e-services/{service_id}/portfolios/{portfolio_id}"
 }
