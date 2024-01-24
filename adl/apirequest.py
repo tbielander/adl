@@ -17,7 +17,7 @@ class Request:
     """
     Klasse zur vereinfachten Formulierung von API-Requests
     """
-    def __init__(self, api_template, apikey="", content_type="application/xml", accept="application/xml", timeout=20):
+    def __init__(self, api_template, apikey="", content_type="application/xml", accept="application/xml", timeout=300):
         self.url_template = BASE_URL + API[api_template]
         self.url = ""
         self.params = {"apikey":apikey}
