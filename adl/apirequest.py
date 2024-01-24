@@ -46,14 +46,14 @@ class Request:
         if not xmlns:
             xmlns = {"xmlbeans": "http://com/exlibris/urm/general/xmlbeans"}
         if self.response_dict:
-            error_list = self.response_dict["errorList"]
-            err_msg = str(error_list) if error_list else "errorList nicht gefunden"
+            error_list = self.response_dict.get("errorList", {})
+            err_msg = str(error_list) if error_list else str(self.response_dict)
         elif self.response_root.tag:
             error_list = self.response_root.find("xmlbeans:errorList", namespaces=xmlns)
             if error_list:
                 err_msg = "; ".join([e[0].text + " - " + e[1].text.rstrip("; ") for e in error_list])
             else:
-                err_msg = "errorList nicht gefunden"
+                err_msg = ET.tostring(self.response_root)
         else:
             err_msg = "Keine Fehler-Details verfügbar"
         return err_msg
