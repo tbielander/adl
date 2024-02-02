@@ -47,7 +47,7 @@ class Request:
             xmlns = {"xmlbeans": "http://com/exlibris/urm/general/xmlbeans"}
         if self.response_dict:
             error_list = self.response_dict.get("errorList", {})
-            err_msg = str(error_list) if error_list else str(self.response_dict)
+            err_msg = str(error_list) if error_list else "Unbekannter Fehler"
         elif self.response_root.tag:
             error_list = self.response_root.find("xmlbeans:errorList", namespaces=xmlns)
             if error_list:
