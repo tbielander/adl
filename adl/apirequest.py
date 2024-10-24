@@ -143,34 +143,34 @@ class EmptyRequest(Request):
 # BIB
 
 class BibRequest(Request):
-    def __init__(self, mms_id, apikey=""):
-        super().__init__("bib", apikey=apikey)
+    def __init__(self, mms_id, apikey="", **kwargs):
+        super().__init__("bib", apikey=apikey, **kwargs)
         self.url = self.url_template.format(
             mms_id = parse.quote(mms_id))
 
 class HoldingsRequest(Request):
-    def __init__(self, mms_id, apikey=""):
-        super().__init__("holdings", apikey=apikey)
+    def __init__(self, mms_id, apikey="", **kwargs):
+        super().__init__("holdings", apikey=apikey, **kwargs)
         self.url = self.url_template.format(
             mms_id = parse.quote(mms_id))
 
 class HoldingRequest(Request):
-    def __init__(self, mms_id, holding_id, apikey=""):
-        super().__init__("holding", apikey=apikey)
+    def __init__(self, mms_id, holding_id, apikey="", **kwargs):
+        super().__init__("holding", apikey=apikey, **kwargs)
         self.url = self.url_template.format(
             mms_id = parse.quote(mms_id),
             holding_id = parse.quote(holding_id))
 
 class ItemsRequest(Request):
-    def __init__(self, mms_id, holding_id, apikey=""):
-        super().__init__("items", apikey=apikey)
+    def __init__(self, mms_id, holding_id, apikey="", **kwargs):
+        super().__init__("items", apikey=apikey, **kwargs)
         self.url = self.url_template.format(
             mms_id = parse.quote(mms_id),
             holding_id = parse.quote(holding_id))
 
 class ItemRequest(Request):
-    def __init__(self, mms_id, holding_id, item_pid, apikey=""):
-        super().__init__("item", apikey=apikey)
+    def __init__(self, mms_id, holding_id, item_pid, apikey="", **kwargs):
+        super().__init__("item", apikey=apikey, **kwargs)
         self.url = self.url_template.format(
             mms_id = parse.quote(mms_id),
             holding_id = parse.quote(holding_id),
@@ -179,16 +179,16 @@ class ItemRequest(Request):
 # Item Loans and Requests
 
 class LoansByItemRequest(Request):
-    def __init__(self, mms_id, holding_id, item_pid, apikey=""):
-        super().__init__("item_loans", apikey=apikey)
+    def __init__(self, mms_id, holding_id, item_pid, apikey="", **kwargs):
+        super().__init__("item_loans", apikey=apikey, **kwargs)
         self.url = self.url_template.format(
             mms_id = parse.quote(mms_id),
             holding_id = parse.quote(holding_id),
             item_pid = parse.quote(item_pid))
 
 class RequestsByItemRequest(Request):
-    def __init__(self, mms_id, holding_id, item_pid, apikey=""):
-        super().__init__("item_requests", apikey=apikey)
+    def __init__(self, mms_id, holding_id, item_pid, apikey="", **kwargs):
+        super().__init__("item_requests", apikey=apikey, **kwargs)
         self.url = self.url_template.format(
             mms_id = parse.quote(mms_id),
             holding_id = parse.quote(holding_id),
@@ -197,50 +197,57 @@ class RequestsByItemRequest(Request):
 # Acquisitions
 
 class LicenseRequest(Request):
-    def __init__(self, license_code, apikey=""):
-        super().__init__("license", apikey=apikey)
+    def __init__(self, license_code, apikey="", **kwargs):
+        super().__init__("license", apikey=apikey, **kwargs)
         self.url = self.url_template.format(
             license_code = parse.quote(license_code))
 
 class POLsRequest(Request):
-    def __init__(self, apikey=""):
-        super().__init__("pols", apikey=apikey)
+    def __init__(self, apikey="", **kwargs):
+        super().__init__("pols", apikey=apikey, **kwargs)
         self.url = self.url_template
 
 class POLRequest(Request):
-    def __init__(self, po_line_id, apikey=""):
-        super().__init__("pol", apikey=apikey)
+    def __init__(self, po_line_id, apikey="", **kwargs):
+        super().__init__("pol", apikey=apikey, **kwargs)
         self.url = self.url_template.format(
             po_line_id = parse.quote(po_line_id))
 
 class VendorsRequest(Request):
-    def __init__(self, apikey=""):
-        super().__init__("vendors", apikey=apikey)
+    def __init__(self, apikey="", **kwargs):
+        super().__init__("vendors", apikey=apikey, **kwargs)
         self.url = self.url_template
 
 class VendorRequest(Request):
-    def __init__(self, vendor_code, apikey=""):
-        super().__init__("vendor", apikey=apikey)
+    def __init__(self, vendor_code, apikey="", **kwargs):
+        super().__init__("vendor", apikey=apikey, **kwargs)
         self.url = self.url_template.format(
             vendor_code = parse.quote(vendor_code))
 
 class VendorPOLsRequest(Request):
-    def __init__(self, vendor_code, apikey=""):
-        super().__init__("vendor_pols", apikey=apikey)
+    def __init__(self, vendor_code, apikey="", **kwargs):
+        super().__init__("vendor_pols", apikey=apikey, **kwargs)
         self.url = self.url_template.format(
             vendor_code = parse.quote(vendor_code))
 
 class VendorInvoicesRequest(Request):
-    def __init__(self, vendor_code, apikey=""):
-        super().__init__("vendor_invoices", apikey=apikey)
+    def __init__(self, vendor_code, apikey="", **kwargs):
+        super().__init__("vendor_invoices", apikey=apikey, **kwargs)
         self.url = self.url_template.format(
             vendor_code = parse.quote(vendor_code))
 
 # Electronic
 
+class PortfoliosRequest(Request):
+    def __init__(self, collection_id, service_id, apikey="", **kwargs):
+        super().__init__("portfolios", apikey=apikey, **kwargs)
+        self.url = self.url_template.format(
+            collection_id = collection_id,
+            service_id = service_id)
+
 class PortfolioRequest(Request):
-    def __init__(self, collection_id, service_id, portfolio_id, apikey=""):
-        super().__init__("portfolio", apikey=apikey)
+    def __init__(self, collection_id, service_id, portfolio_id, apikey="", **kwargs):
+        super().__init__("portfolio", apikey=apikey, **kwargs)
         self.url = self.url_template.format(
             collection_id = collection_id,
             service_id = service_id,
