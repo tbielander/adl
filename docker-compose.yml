@@ -1,12 +1,11 @@
-version: "3.7"
 services: 
     upload:
         build: 
             context: .
             dockerfile: Dockerfile
         volumes:
-            - ./:/home/adl/${WD}
+            - ./:/home/adl/my-adl-project
             - /etc/localtime:/etc/localtime:ro
-        container_name: ${WD}
+        container_name: my-adl-project
         stdin_open: true # docker run -i
         tty: true        # docker run -t
