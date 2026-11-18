@@ -2,15 +2,18 @@
 apirequests.py bietet Wrapper-Klassen für die HTTP-Requests der Alma REST API
 """
 
-import os
 import json
+import os
 import xml.etree.ElementTree as ET
+from copy import deepcopy
 from datetime import datetime
 from urllib import parse
+
 import requests
 from requests.exceptions import Timeout
-from adl.api import BASE_URL, API
-from adl.message import SuccessMsg, ErrorMsg, InfoMsg
+
+from adl.api import API, BASE_URL
+from adl.message import ErrorMsg, InfoMsg, SuccessMsg
 
 
 class Request:
@@ -23,11 +26,11 @@ class Request:
         self.params = {"apikey":apikey}
         self.headers = {"Content-Type":content_type, "Accept":accept}
         self.timeout = timeout
-        self.data_dict = dict()
+        self.data_dict = {}
         self.data_root = ET.Element("root")
-        self.response_dict = dict()
+        self.response_dict = {}
         self.response_root = ET.Element("root")
-        self.error_dict = dict()
+        self.error_dict = {}
         self.error_root = ET.Element("root")
         self.msg = InfoMsg()
 
@@ -51,14 +54,16 @@ class Request:
         elif self.response_root.tag:
             error_list = self.response_root.find("xmlbeans:errorList", namespaces=xmlns)
             if error_list:
-                err_msg = "; ".join([e[0].text + " - " + e[1].text.rstrip("; ") for e in error_list])
+                err_msg = str(error_list)
             else:
-                err_msg = ET.tostring(self.response_root)
+                err_msg = str(ET.tostring(self.response_root))
         else:
             err_msg = "Keine Fehler-Details verfügbar"
         return err_msg
 
-    def get(self, backup=True, backup_dir=os.getcwd(), backup_name="backup", details=False, dry_run=False, special_params=None):
+    def get(self, backup=True, backup_dir=None, backup_name="backup", details=False, dry_run=False, special_params=None):
+        if backup_dir is None:
+            backup_dir = os.getcwd()
         if dry_run:
             self.msg = InfoMsg(text="TESTLAUF")
             return self.msg
@@ -70,8 +75,8 @@ class Request:
             return self.msg
         self.msg = self.keep_response(rget)
         if rget.ok:
-            self.data_root = self.response_root
-            self.data_dict = self.response_dict
+            self.data_root = deepcopy(self.response_root)
+            self.data_dict = deepcopy(self.response_dict)
         else:
             self.msg = ErrorMsg(text=self.error_log()) if details else ErrorMsg()
         if backup:
